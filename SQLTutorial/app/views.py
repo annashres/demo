@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Departments, Professors, Courses, Students, Reviews
 from .tables import DepartmentsTable, ProfessorsTable, CoursesTable, StudentsTable, ReviewsTable
-
+from .forms import ReviewsForm
 def welcome(request):
     ##welcome page 
 
@@ -10,8 +10,7 @@ def departments_list(request):
     RequestConfig(request, paginate={'per_page': 9000}).configure(table) #all on one page
     return render(request, 'app/list.html', {
         'table': table,
-        'title': 'Departments',
-        'client_principal_name': __get_client_principal_name(request)
+        'title': 'Departments'
     })
 
 def professors_list(request):
@@ -19,8 +18,7 @@ def professors_list(request):
     RequestConfig(request, paginate={'per_page': 9000}).configure(table)
     return render(request, 'app/list.html', {
         'table': table,
-        'title': 'Departments',
-        'client_principal_name': __get_client_principal_name(request)
+        'title': 'Departments'
     })
 
 def courses_list(request):
@@ -28,30 +26,20 @@ def courses_list(request):
     RequestConfig(request, paginate={'per_page': 9000}).configure(table)
     return render(request, 'app/list.html', {
         'table': table,
-        'title': 'Courses',
-        'client_principal_name': __get_client_principal_name(request)
+        'title': 'Courses'
     })
 
 def courses_detail(request, pk):
     #course = Course.objects.get(pk=pk)
     courseTable = CoursesTable(Courses.objects.filter(ID=pk))
     studentsTable = StudentsTable(Students.objects.filter(course=pk))
-    reviewsTable = ReviewsTable(Reviews.objects.filter(courses=pk).order_by('-Date'))
-    blockersTable =  BlockersTable(Blockers.objects.filter(Apps=app))
-    contactsTable =  ContactsTable(Contacts.objects.filter(Apps=app))
-    featuresTable =  FeaturesTable(Features.objects.filter(applications=app))
-    ID = pk
+    reviewsTable = ReviewsTable(Reviews.objects.filter(courses=pk)
 
 
     return render(request, 'app/app_detail2.html', {
-        'ID': pk,
-        'app': app,
-        'appTable': appTable,
-        'blockersTable': blockersTable,
-        'featuresTable': featuresTable,
-        'contactsTable': contactsTable,
-        'notesTable': notesTable,
-        'client_prinicpal_name': __get_client_principal_name(request)
+        'courseTable': courseTable,
+        'studentsTable': studentsTable,
+        'reviewsTable': reviewsTable
     })
 
 def students_list(request):
@@ -59,8 +47,7 @@ def students_list(request):
     RequestConfig(request, paginate={'per_page': 9000}).configure(table)
     return render(request, 'app/list.html', {
         'table': table,
-        'title': 'Students',
-        'client_principal_name': __get_client_principal_name(request)
+        'title': 'Students'
     })
 
 
@@ -69,6 +56,17 @@ def reviews_list(request):
     RequestConfig(request, paginate={'per_page': 9000}).configure(table)
     return render(request, 'app/list.html', {
         'table': table,
-        'title': 'Reviews',
-        'client_principal_name': __get_client_principal_name(request)
+        'title': 'Reviews'
     })
+def new_review(request):
+    if request.method == "POST":
+        form = ReviewsForm(request.POST)
+        if form.is_valid():
+            feature = form.save()
+            return redirect('done')
+    else:
+        form = ReviewsForm()
+    return render(request, 'app/review.html', {'form': form})
+
+def done(request):
+    return render(request, 'app/done.html')

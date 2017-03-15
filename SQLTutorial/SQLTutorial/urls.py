@@ -18,4 +18,12 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^professors', app.views.professors_list, name='professors_list'), 
+    url(r'^departments', app.views.departments_list, name='departments_list'), 
+    url(r'^courses', app.views.courses_list, name='courses_list'), 
+    url(r'^course/(?P<pk>\d+)/$', app.views.courses_detail, name='courses_detail'), 
+    url(r'^students', app.views.students_list, name='students_list'), 
+    url(r'^reviews', app.views.reviews_list, name='reviews_list'), 
+    url(r'^review/new', app.views.new_review, name='new_review'), 
+    url(r'^done', app.views.done, name='done'), 
 ]
