@@ -19,10 +19,12 @@ import app.views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^professors', app.views.professors_list), 
-    url(r'^courses', app.views.courses_list), 
-    #url(r'^course/(?P<pk>\d+)/$', app.views.courses_detail, name='courses_detail'), 
-    url(r'^students', app.views.students_list),
-    url(r'^professor/new', app.views.new_professor), 
+    url(r'^professors/$', app.views.professors_list, name='professors_list'), 
+    url(r'^courses/$', app.views.courses_list, name='courses_list'), 
+    url(r'^students/$', app.views.students_list, name='students_list'),
+    url(r'^professor/new/$', app.views.new_professor, name='new_professor'), 
+    url(r'^course/new/$', app.views.new_course, name='new_course'), 
+    url(r'^student/new/$', app.views.new_student, name='new_student'), 
+    url(r'^course/(?P<pk>\d+)/$', app.views.course_detail, name='course_detail')
 
 ]

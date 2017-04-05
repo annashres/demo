@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% load django_tables2 %}
@@ -14,7 +15,12 @@
         {% endif %}
     </div>
     <div class="main">
-        {% render_table table %}
+        {% render_table courseTable %}
+    </div>
+        <div class="main">
+        {% load django_tables2 %}
+        <h3>Students in Course</h3>
+        {% render_table studentsTable %}
     </div>
 </div>    
 {% endblock %}

@@ -27,13 +27,13 @@ class Courses(models.Model):
         ('Fall', 'Fall'), ('Winter','Winter'), ('Spring','Spring'), ('Summer', 'Summer')), verbose_name='Semester')
     year = models.CharField(max_length=64)
     def __str__(self):
-        return self.id 
+        return self.name 
 
 class Students(models.Model):
     id = models.AutoField(auto_created=True, primary_key=True, serialize=False)
-    email = models.EmailField(max_length=256, verbose_name='Email Address') 
     firstname = models.CharField(max_length=256, verbose_name='First Name')
     lastname = models.CharField(max_length=256, verbose_name='Last Name')
+    email = models.EmailField(max_length=256, verbose_name='Email Address') 
     graduation_year = models.CharField(
         max_length = 64,
         choices = (

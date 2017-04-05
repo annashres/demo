@@ -13,25 +13,26 @@ def professors_list(request):
     })
 
 def courses_list(request):
-    table = CoursesTable(Courses.objects.all().prefetch_related('Professors'))
+    table = CoursesTable(Courses.objects.all().prefetch_related('professor'))
     RequestConfig(request, paginate={'per_page': 9000}).configure(table)
     return render(request, 'list.html', {
         'table': table,
         'title': 'Courses'
     })
 
-# def courses_detail(request, pk):
-#     #course = Course.objects.get(pk=pk)
-#     courseTable = CoursesTable(Courses.objects.filter(ID=pk))
-#     studentsTable = StudentsTable(Students.objects.filter(course=pk))
+def course_detail(request, pk):
+    #course = Course.objects.get(pk=pk)
+    courseTable = CoursesTable(Courses.objects.filter(id=pk))
+    studentsTable = StudentsTable(Students.objects.filter(courses=pk))
 
-#     return render(request, 'app/app_detail2.html', {
-#         'courseTable': courseTable,
-#         'studentsTable': studentsTable,
-#     })
+    return render(request, 'detail.html', {
+        'title': 'Course Information',
+        'courseTable': courseTable,
+        'studentsTable': studentsTable,
+    })
 
 def students_list(request):
-    table = StudentsTable(Students.objects.all().prefetch_related('Courses'))
+    table = StudentsTable(Students.objects.all().prefetch_related('courses'))
     RequestConfig(request, paginate={'per_page': 9000}).configure(table)
     return render(request, 'list.html', {
         'table': table,
@@ -39,6 +40,7 @@ def students_list(request):
     })
 
 
+##new pages
 def new_professor(request):
     if request.method == "POST":
         form = ProfessorsForm(request.POST)
@@ -47,8 +49,29 @@ def new_professor(request):
             return redirect('professors_list')
     else:
         form = ProfessorsForm()
-    return render(request, 'edit.html', {'form': form, 'title':' Add Professor'})
+    return render(request, 'edit.html', {'form': form, 'title':'Add Professor'})
 
+def new_course(request):
+    if request.method == "POST":
+        form = CoursesForm(request.POST)
+        if form.is_valid():
+            feature = form.save()
+            return redirect('courses_list')
+    else:
+        form = CoursesForm()
+    return render(request, 'edit.html', {'form': form, 'title':'Add Course'})
+
+def new_student(request):
+    if request.method == "POST":
+        form = StudentsForm(request.POST)
+        if form.is_valid():
+            feature = form.save()
+            return redirect('student_list')
+    else:
+        form = StudentsForm()
+    return render(request, 'edit.html', {'form': form, 'title':'Add Student'})
+
+##edit pages
 # def edit_professor(request, pk):
 #     professor = Professors.objects.get(pk=pk)
 #     if request.method == "POST":

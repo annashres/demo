@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load bootstrap %}
 {% block content %}
-
+<div class="container">
     <form method="POST" class="post-form form-horizontal" novalidate="novalidate">{% csrf_token %}
         <legend>{{ title }}</legend>
         {% csrf_token %}
@@ -12,4 +12,5 @@
             </div>
         </div>
     </form>
+</div>
  {% endblock %}
