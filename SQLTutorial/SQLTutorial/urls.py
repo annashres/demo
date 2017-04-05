@@ -19,12 +19,18 @@ import app.views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+
     url(r'^professors/$', app.views.professors_list, name='professors_list'), 
-    url(r'^courses/$', app.views.courses_list, name='courses_list'), 
-    url(r'^students/$', app.views.students_list, name='students_list'),
     url(r'^professor/new/$', app.views.new_professor, name='new_professor'), 
-    url(r'^course/new/$', app.views.new_course, name='new_course'), 
+    url(r'^professor/(?P<pk>\d+)/edit/$', app.views.edit_professor, name='edit_professor'),
+
+    url(r'^students/$', app.views.students_list, name='students_list'),
     url(r'^student/new/$', app.views.new_student, name='new_student'), 
-    url(r'^course/(?P<pk>\d+)/$', app.views.course_detail, name='course_detail')
+
+    url(r'^courses/$', app.views.courses_list, name='courses_list'), 
+    url(r'^course/new/$', app.views.new_course, name='new_course'), 
+    url(r'^course/(?P<pk>\d+)/$', app.views.course_detail, name='course_detail'),
+    url(r'^course/(?P<pk>\d+)/edit/$', app.views.edit_course, name='edit_course'),
+    url(r'^course/(?P<pk>\d+)/delete/$', app.views.delete_course, name='delete_course'),
 
 ]

@@ -4,16 +4,9 @@
 {% load django_tables2 %}
 {% block content %}
 <div class="container ">
-    <h2> {{title}} </h2>
-    <div class="main">
-        {% if 'Professors' in title %}
-            <a class="btn btn-primary" href="{% url 'new_professor'%}"> Add Professor</a>
-        {% elif 'Course' in title %}
-            <a class="btn btn-primary" href="{% url 'new_course'%}"> Add Course</a>
-        {% elif 'Student' in title %}
-            <a class="btn btn-primary" href="{% url 'new_student'%}"> Add Student</a>
-        {% endif %}
-    </div>
+    <h2>
+        {{title}}<a href="{% url 'edit_course' pk=item.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    </h2>
     <div class="main">
         {% render_table courseTable %}
     </div>
@@ -21,6 +14,10 @@
         {% load django_tables2 %}
         <h3>Students in Course</h3>
         {% render_table studentsTable %}
+         <div class="pull-right">
+            <a class="btn btn-primary" href="{% url 'new_student'%}"> Add Student</a>
+        </div>
     </div>
+
 </div>    
 {% endblock %}

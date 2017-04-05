@@ -11,6 +11,7 @@ class ProfessorsTable(tables.Table):
 
 class CoursesTable(tables.Table):
     id = tables.Column(visible=False)
+    name = tables.LinkColumn('course_detail', args=[A('pk')])
     class Meta:
         model = Courses
         attrs = {'class': 'table table-bordered table-striped table-hover'}

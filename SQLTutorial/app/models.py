@@ -20,7 +20,7 @@ class Courses(models.Model):
         max_length = 64,
         choices = (
         ('Math', 'Math'), ('English','English'), ('Science','Science'), ('History', 'History')), verbose_name='Department')    
-    professor = models.ForeignKey('Professors', verbose_name='Professor')
+    professor = models.ForeignKey('Professors', null=True, blank=True, on_delete=models.SET_NULL, verbose_name='Professor')
     semester = models.CharField(
         max_length = 64,
         choices = (
