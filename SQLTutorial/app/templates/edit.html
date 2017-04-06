@@ -9,7 +9,7 @@
         {{ form|bootstrap_horizontal }}
 
         <div class="pull-right">
-            {% if 'Edit' in title %}
+            {% if 'Edit Course' in title %}
                 <a class="btn btn-danger" href="{% url 'delete_course' pk=item.pk%}"> Delete Course</a>
             {% endif %}
             <button type="submit" class="save btn btn-success" onclick="this.disabled=true,this.form.submit();">Save</button>

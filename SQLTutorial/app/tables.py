@@ -3,7 +3,7 @@ from django_tables2.utils import A
 from .models import Professors, Courses, Students
 
 class ProfessorsTable(tables.Table):
-    id = tables.Column(visible=False)
+    id = tables.LinkColumn('edit_professor', args=[A('pk')])
     class Meta:
         model = Professors
         attrs = {'class': 'table table-bordered table-striped table-hover'}

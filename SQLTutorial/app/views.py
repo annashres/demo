@@ -7,7 +7,9 @@ from django_tables2 import RequestConfig
 ##professors
 #show all professors in a list
 def professors_list(request):
+    #make table
     table = ProfessorsTable(Professors.objects.all())
+    #specify number of rows per page in table
     RequestConfig(request, paginate={'per_page': 9000}).configure(table)
     return render(request, 'list.html', {
         'table': table,
@@ -29,6 +31,7 @@ def new_professor(request):
 def edit_professor(request, pk):
     professor = Professors.objects.get(pk=pk)
     if request.method == "POST":
+        #instance=professor auto fills the form with current professors info
         form = ProfessorsForm(request.POST, instance=professor)
         if form.is_valid():
             courprofessorse = form.save()
@@ -40,6 +43,7 @@ def edit_professor(request, pk):
 ##students
 #show all students in a list
 def students_list(request):
+    #prefetch related returns a QuerySet that will automatically retrieve, in a single batch, related objects for each of the specified lookups.
     table = StudentsTable(Students.objects.all().prefetch_related('courses'))
     RequestConfig(request, paginate={'per_page': 9000}).configure(table)
     return render(request, 'list.html', {
