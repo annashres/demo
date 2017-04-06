@@ -147,7 +147,9 @@ These forms will allow us to add and edit rows in our database. The forms are fo
 
 #### Views
 >TODO Views
+
 app/views.py. 
+
 The views enable CRUD for your database. 
 
 #### URLs
