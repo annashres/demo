@@ -141,7 +141,9 @@ The tables are found in app/tables.py The docs are [here](https://django-tables2
 #### Forms
 
 >TODO Forms
-We can create forms directly from the models we made with [Django ModelForms](https://docs.djangoproject.com/en/1.10/topics/forms/modelforms/). These forms will allow us to add and edit rows in our database. The forms are found in app/forms.py
+
+We can create forms directly from the models we made with [Django ModelForms](https://docs.djangoproject.com/en/1.10/topics/forms/modelforms/). 
+These forms will allow us to add and edit rows in our database. The forms are found in app/forms.py
 
 #### Views
 >TODO Views
